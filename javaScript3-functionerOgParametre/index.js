@@ -1,20 +1,27 @@
 // node --watch index.js
 
-//1 sayHello(fisrtName);
+const firstName = "Julie";
+const lastName = "Gyldenløve";
+
+//1 sayHello(firstName);
 function sayHello(firstName) {
-  console.log("Hello ${firstName}");
+  console.log(`Hello ${firstName}`);
 }
 
-//2 sayHello(myName);
+//2 sayHello(firstName);
 //3 let firstName;
 //4 sayHello();
-//5 sayHello(firstName, lastName);
+//6 sayHello(firstName, lastName);
 //5 sayHello(lastName, firstName);
 
+const animalType = "kitty";
+const animalName = "Speekz";
+
 function presentPet(firstName, animalType, animalName) {
-  console.log("My name is " + firstName + ", I have a " + animalType + " called " + animalName);
+  console.log(`My name is ${firstName} I have a ${animalType} called ${animalName}`);
 }
 
 // presentPet(firstName, animalType, animalName);
 // presentPet(one, two, three);
-// presentPet("Julie", "cat", "Xenia");
+// presentPet("Kasper", "cat", "Xenia");
+// presentPet(firstName, "cat", "Xenia");
