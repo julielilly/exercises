@@ -6,8 +6,8 @@ const scissorsButton = document.querySelector(".scissors");
 const player = document.querySelector("#player1");
 const computer = document.querySelector("#player2");
 const buttons = [rockButton, paperButton, scissorsButton];
-
 const computerChoices = ["rock", "paper", "scissors"];
+
 let userGuess;
 
 window.onload = restart();
@@ -46,9 +46,7 @@ function userGuesses() {
     player.classList.remove("rock", "paper", "scissors");
     player.classList.remove("shake");
 
-    if (userGuess === "rock") player.classList.add("rock");
-    if (userGuess === "paper") player.classList.add("paper");
-    if (userGuess === "scissors") player.classList.add("scissors");
+    player.classList.add(userGuess);
   });
 
   computerGuesses();
@@ -64,15 +62,7 @@ function computerGuesses() {
     computer.classList.remove("rock", "paper", "scissors");
     computer.classList.remove("shake");
 
-    if (computerGuess === "rock") {
-      computer.classList.add("rock");
-    }
-    if (computerGuess === "paper") {
-      computer.classList.add("paper");
-    }
-    if (computerGuess === "scissors") {
-      computer.classList.add("scissors");
-    }
+    computer.classList.add(computerGuess);
   });
 
   determinWinner(computerGuess);
@@ -83,26 +73,9 @@ function determinWinner(computerGuess) {
 
   if (userGuess === computerGuess) {
     result = "draw";
-  }
-
-  if (userGuess === "rock" && computerGuess === "paper") {
+  } else if ((userGuess === "rock" && computerGuess === "paper") || (userGuess === "paper" && computerGuess === "scissors") || (userGuess === "scissors" && computerGuess === "rock")) {
     result = "computer";
-  }
-  if (userGuess === "rock" && computerGuess === "scissors") {
-    result = "user";
-  }
-
-  if (userGuess === "paper" && computerGuess === "rock") {
-    result = "user";
-  }
-  if (userGuess === "paper" && computerGuess === "scissors") {
-    result = "computer";
-  }
-
-  if (userGuess === "scissors" && computerGuess === "rock") {
-    result = "computer";
-  }
-  if (userGuess === "scissors" && computerGuess === "paper") {
+  } else {
     result = "user";
   }
 
