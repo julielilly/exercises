@@ -1,13 +1,14 @@
 body {
-  margin: 0;
+  margin: 5vw;
   background-color: #444059;
-  font-family: 'Luckiest Guy', cursive;
+  font-family: "Luckiest Guy", cursive;
   color: #eee;
 }
 
 h1 {
   text-align: center;
   font-size: 8vw;
+  margin: 0;
 }
 
 #gamefield {
@@ -26,9 +27,9 @@ h1 {
 }
 
 .player {
-  transform: scale(var(--rot),1);
-  width: 40vw;
-  height: 40vw;
+  transform: scale(var(--rot), 1);
+  width: 25vw;
+  height: 25vw;
   background-size: 100%;
   background-image: url(hand_rock.png);
 }
@@ -53,34 +54,34 @@ h1 {
 
 @keyframes shake {
   0% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
   }
   16% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
   }
   24% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
   }
   32% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
   }
   48% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
   }
   56% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
   }
   64% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
   }
   80% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(-40deg);
   }
   96% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(5deg);
   }
   100% {
-    transform: scale(var(--rot),1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
+    transform: scale(var(--rot), 1) translateX(calc((var(--rot) - 1) * 50%)) rotate(0deg);
   }
 }
 
@@ -107,7 +108,7 @@ h1 {
 }
 
 #buttons.disabled button {
-  filter: grayscale(100%) brightness(.75);
+  filter: grayscale(100%) brightness(0.75);
 }
 
 #buttons button {
@@ -115,7 +116,7 @@ h1 {
   border-radius: 10vw;
   width: 10vw;
   height: 10vw;
-  transition: filter .8s;
+  transition: filter 0.8s;
 }
 
 button.rock {

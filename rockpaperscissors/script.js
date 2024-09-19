@@ -1,58 +1,40 @@
 "use strict";
 
-const rockButton = document.querySelector(".rock");
-const paperButton = document.querySelector(".paper");
-const scissorsButton = document.querySelector(".scissors");
 const player = document.querySelector("#player1");
 const computer = document.querySelector("#player2");
-const buttons = [rockButton, paperButton, scissorsButton];
 const computerChoices = ["rock", "paper", "scissors"];
 
-let userGuess;
+document.querySelectorAll("#buttons > *").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    restart(btn.dataset.choice);
+  });
+});
 
-window.onload = restart();
-
-function restart() {
-  computer.classList.remove("rock", "paper", "scissors");
+function restart(userGuess) {
+  player.addEventListener("animationend", () => {
+    computer.classList.remove("shake", "rock", "paper", "scissors");
+  });
   document.querySelector("#draw").classList.add("hidden");
   document.querySelector("#win").classList.add("hidden");
   document.querySelector("#lose").classList.add("hidden");
 
-  rockButton.addEventListener("click", rock);
-  paperButton.addEventListener("click", paper);
-  scissorsButton.addEventListener("click", scissors);
+  userGuesses(userGuess);
 }
 
-function rock() {
-  userGuess = "rock";
-  userGuesses();
-}
-
-function paper() {
-  userGuess = "paper";
-  userGuesses();
-}
-
-function scissors() {
-  userGuess = "scissors";
-  userGuesses();
-}
-
-function userGuesses() {
+function userGuesses(userGuess) {
   player.classList.add("shake");
   computer.classList.add("shake");
 
   player.addEventListener("animationend", () => {
-    player.classList.remove("rock", "paper", "scissors");
-    player.classList.remove("shake");
+    player.classList.remove("shake", "rock", "paper", "scissors");
 
     player.classList.add(userGuess);
   });
 
-  computerGuesses();
+  computerGuesses(userGuess);
 }
 
-function computerGuesses() {
+function computerGuesses(userGuess) {
   let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
   console.log("Computer Guess", computerGuess);
@@ -60,15 +42,13 @@ function computerGuesses() {
 
   computer.addEventListener("animationend", () => {
     computer.classList.remove("rock", "paper", "scissors");
-    computer.classList.remove("shake");
-
     computer.classList.add(computerGuess);
   });
 
-  determinWinner(computerGuess);
+  determinWinner(computerGuess, userGuess);
 }
 
-function determinWinner(computerGuess) {
+function determinWinner(computerGuess, userGuess) {
   let result;
 
   if (userGuess === computerGuess) {
@@ -98,6 +78,4 @@ function showResult(result) {
       document.querySelector("#lose").classList.remove("hidden");
     }
   });
-
-  restart();
 }
