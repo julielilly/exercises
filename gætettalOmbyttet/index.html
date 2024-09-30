@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Think of a number between 1 and 100</h1>
+    <div>
+        <button class="low display">Too low</button>
+        <button class="high display">To high</button>
+        <button class="correct display">Yes!</button>
+        <button class="start">Start game</button>
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #8E44AD, #3498DB);
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100svh;
+        text-align: center;
+        color: #f0f0f0;
+    }
+
+    h1 {
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        border-radius: 12px;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #ffffff;
+    }
+
+    div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    button {
+        padding: 15px 30px;
+        margin: 10px;
+        font-size: 1.3rem;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        color: #ffffff;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+
+    .low {
+        background-color: #e74c3c;
+
+        &:hover {
+            background-color: #c0392b;
+        }
+    }
+
+    .high {
+        background-color: #f39c12;
+
+        &:hover {
+            background-color: #e67e22;
+        }
+    }
+
+    .correct {
+        background-color: #2ecc71;
+
+        &:hover {
+            background-color: #27ae60;
+        }
+    }
+
+    .start {
+        background-color: #1abc9c;
+
+        &:hover {
+            background-color: #16a085;
+        }
+    }
+
+    .display {
+        display: none;
+    }
+
+    /* Applying the winner-burst animation */
+    .winner-animation {
+        animation: winner-burst 1.5s ease-out;
+    }
+
+    /* Winning burst animation */
+    @keyframes winner-burst {
+        0% {
+            background-size: 100%;
+            background-position: center;
+        }
+
+        25% {
+            background-size: 150%;
+            background-position: left;
+        }
+
+        50% {
+            background-size: 200%;
+            background-position: right;
+        }
+
+        75% {
+            background-size: 150%;
+            background-position: left;
+        }
+
+        100% {
+            background-size: 100%;
+            background-position: center;
+        }
+    }
+
+    .scale-animation {
+        animation: h1-scale 1s ease-in;
+    }
+
+    @keyframes h1-scale {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
