@@ -15,9 +15,6 @@ const vehicles = [
 // Reference to the table body element in the HTML for displaying vehicles
 const tbodyPointer = document.querySelector("tbody");
 
-// Initially display all vehicles when the page loads
-showTheseVehicles(vehicles);
-
 // Function to display the array of vehicles in the table
 function showTheseVehicles(arr) {
   // Clear existing table content
@@ -45,22 +42,15 @@ function removeExcess(parameter) {
 }
 
 // Filters for specific vehicle categories
+const onlyIsElectric = vehicles.filter((vehicle) => vehicle.isElectric);
+const onlySeveralSeats = vehicles.filter((vehicle) => vehicle.passengers >= 2);
+const onlyJonasIsElectric = vehicles.filter((vehicle) => vehicle.ownedBy === "Jonas" && vehicle.isElectric);
+const onlyRugbrod = vehicles.filter((vehicle) => vehicle.passengers >= 2 && vehicle.fuel === "Rugbrød");
 
-const onlyIsElectric = vehicles.filter((vehicle) => {
-  if (vehicle.isElectric) return true;
-});
-const onlySeveralSeats = vehicles.filter((vehicle) => {
-  if (vehicle.passengers >= 2) return true;
-});
-const onlyJonasIsElectric = vehicles.filter((vehicle) => {
-  if (vehicle.ownedBy === "Jonas" && vehicle.isElectric) return true;
-});
-const onlyRugbrod = vehicles.filter((vehicle) => {
-  if (vehicle.passengers >= 2 && vehicle.fuel === "Rugbrød") return true;
-});
+// Initially display all vehicles when the page loads
+showTheseVehicles(vehicles);
 
 // Add event listeners to buttons to display filtered vehicle lists
-
 document.querySelector("#button1").addEventListener("click", () => {
   showTheseVehicles(onlyIsElectric);
 });
