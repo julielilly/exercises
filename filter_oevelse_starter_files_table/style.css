@@ -1,40 +1,120 @@
+/* General Styling */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 20px;
+}
+
+/* Headline Styling */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #4a4a4a;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #4a4a4a;
+}
+
+/* Button Styling */
+#buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #5a6268;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  background-color: #495057;
+}
+
+button.active {
+  background-color: #0056b3;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button.active:hover {
+  background-color: #033bff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styling */
 table {
-    border-collapse: collapse;
-    border: 2px solid rgb(140 140 140);
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-caption {
-    caption-side: bottom;
-    padding: 10px;
-    font-weight: bold;
-}
-
-thead,
-tfoot {
-    background-color: rgb(228 240 245);
+thead {
+  background-color: #dee2e6;
+  color: #333;
 }
 
 th,
 td {
-    border: 1px solid rgb(160 160 160);
-    padding: 8px 10px;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
 }
 
-td:last-of-type {
-    text-align: center;
+th {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: #e9ecef;
 }
 
-tbody>tr:nth-of-type(even) {
-    background-color: rgb(237 238 242);
+td {
+  font-size: 0.9rem;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: #f8f9fa;
 }
 
 tfoot th {
-    text-align: right;
+  text-align: right;
+  background-color: #f1f3f5;
 }
 
 tfoot td {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+/* Table Hover Effects */
+tbody tr:hover {
+  background-color: #ececec;
+  transition: background-color 0.3s ease;
+}
+
+/* Add some spacing for better readability */
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-weight: bold;
 }
