@@ -36,51 +36,29 @@ function showTheseVehicles(arr) {
 
 // Helper function to handle undefined or true values
 function removeExcess(parameter) {
-  if (parameter === undefined) return "";
+  if (parameter === undefined) return "-";
   if (parameter === true) return "X";
   return parameter;
 }
 
 // Filters for specific vehicle categories
-const onlyIsElectric = vehicles.filter((vehicle) => vehicle.isElectric);
-const onlySeveralSeats = vehicles.filter((vehicle) => vehicle.passengers >= 2);
-const onlyJonasIsElectric = vehicles.filter((vehicle) => vehicle.ownedBy === "Jonas" && vehicle.isElectric);
-const onlyRugbrod = vehicles.filter((vehicle) => vehicle.passengers >= 2 && vehicle.fuel === "Rugbrød");
+const filters = {
+  onlyIsElectric: vehicles.filter((vehicle) => vehicle.isElectric),
+  onlySeveralSeats: vehicles.filter((vehicle) => vehicle.passengers >= 2),
+  onlyJonasIsElectric: vehicles.filter((vehicle) => vehicle.ownedBy === "Jonas" && vehicle.isElectric),
+  onlyRugbrod: vehicles.filter((vehicle) => vehicle.passengers >= 2 && vehicle.fuel === "Rugbrød"),
+  all: vehicles,
+};
 
 // Initially display all vehicles when the page loads
 showTheseVehicles(vehicles);
 
-// Add event listeners to buttons to display filtered vehicle lists
-document.querySelector("#button1").addEventListener("click", () => {
-  showTheseVehicles(onlyIsElectric);
-});
-document.querySelector("#button2").addEventListener("click", () => {
-  showTheseVehicles(onlySeveralSeats);
-});
-document.querySelector("#button3").addEventListener("click", () => {
-  showTheseVehicles(onlyJonasIsElectric);
-});
-document.querySelector("#button4").addEventListener("click", () => {
-  showTheseVehicles(onlyRugbrod);
-});
-document.querySelector("#button5").addEventListener("click", () => {
-  showTheseVehicles(vehicles);
-});
+document.querySelector("#buttons").addEventListener("click", (e) => {
+  const buttons = document.querySelectorAll("#buttons button");
+  buttons.forEach((button) => button.classList.remove("active")); // Clear active state from all buttons
 
-// PURE STYLING FOR BUTTON ACTIVE STATE
+  e.target.classList.add("active"); // Set the clicked button as active
 
-// Select all buttons inside the #buttons div
-const buttons = document.querySelectorAll("#buttons button");
-
-// Function to remove the 'active' class from all buttons
-function clearActiveButtons() {
-  buttons.forEach((button) => button.classList.remove("active"));
-}
-
-// Add event listeners for each button to toggle 'active' class
-buttons.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    clearActiveButtons(); // Clear active state from all buttons
-    e.target.classList.add("active"); // Set the clicked button as active
-  });
+  const filterName = e.target.dataset.filter;
+  showTheseVehicles(filters[filterName]); // Show table with relevant filters
 });
