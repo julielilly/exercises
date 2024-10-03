@@ -14,15 +14,19 @@ const texts = {
   },
 };
 
+// Funktion til at sætte sproget dynamisk med lang
 function setLanguage(lang) {
+  // Itererer gennem tekstobjekterne for det valgte sprog og opdaterer indholdet i DOM'en
   texts[lang].texts.forEach((elm) => (document.querySelector(elm.location).innerText = elm.text));
 }
 
-setLanguage("da");
+setLanguage("da"); // Sætter standardteksten til dansk
 
+// Funktion, der kaldes, når brugeren ændrer sproget i dropdown-menuen
 function updateValue(e) {
-  const locale = e.target.value;
-  setLanguage(locale);
+  const locale = e.target.value; // Henter det valgte sprog fra dropdown'en
+  setLanguage(locale); // Opdaterer teksten til det valgte sprog
 }
 
+// Når brugeren vælger et nyt sprog, kaldes 'updateValue' funktionen
 document.querySelector("select").addEventListener("change", updateValue);
