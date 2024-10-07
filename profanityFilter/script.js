@@ -25,9 +25,8 @@ function replaceBadWords() {
     }
   });
 
-  // Check if bad words were found and replaced
-  if (hasBadWords) textElement.innerHTML = text;
-  else dialogElement.showModal(); // Show dialog if no bad words are found
+  // Update the text element with the replaced text if bad words were found; otherwise, show the dialog
+  hasBadWords ? (textElement.innerHTML = text) : dialogElement.showModal();
 }
 
 // Event listener for the filter button
