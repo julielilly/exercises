@@ -1,0 +1,41 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+#text {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.good-word {
+  background-color: yellow;
+}
+
+dialog {
+  padding: 20px;
+  border: 2px solid #ccc;
+}
+
+#closeDialogBtn {
+  margin-top: 10px;
+  padding: 5px 10px;
+}
