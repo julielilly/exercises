@@ -11,12 +11,12 @@ const Animal = {
   desc: "-unknown animal-",
   type: "",
   age: 0,
+  favorite: false,
 };
 
 function start() {
   console.log("ready");
 
-  // TODO: Add event-listeners to filter and sort buttons
   //filters
   document.querySelector("#buttons").addEventListener("click", addFilter);
 
@@ -51,6 +51,7 @@ function preapareObject(jsonObject) {
   animal.desc = texts[2];
   animal.type = texts[3];
   animal.age = jsonObject.age;
+  animal.favorite = false;
 
   return animal;
 }
@@ -73,6 +74,20 @@ function displayAnimal(animal) {
   clone.querySelector("[data-field=type]").textContent = animal.type;
   clone.querySelector("[data-field=age]").textContent = animal.age;
 
+  //favorite
+  const starElement = clone.querySelector("[data-field=star]");
+  starElement.innerHTML = "<span>⭐</span>";
+  starElement.setAttribute("data-active", animal.favorite ? "true" : "false");
+
+  // Add event listener to toggle favorite status
+  starElement.addEventListener("click", () => {
+    // Toggle the favorite property in the global allAnimals array
+    animal.favorite = !animal.favorite;
+
+    // Update the data-active attribute based on the new favorite status
+    starElement.setAttribute("data-active", animal.favorite ? "true" : "false");
+  });
+
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
 }
@@ -94,18 +109,37 @@ function addFilter(e) {
 }
 
 function sortAnimals(e) {
+  const headers = document.querySelectorAll("#sorting th");
   const sortName = e.target.dataset.sort; // Get the property to sort by
   let sortDirection = e.target.dataset.sortDirection; // Get current sort direction from dataset
+
+  // Reset other headers
+  headers.forEach((header) => {
+    header.classList.remove("sortby");
+    header.dataset.sortDirection = "desc";
+  });
 
   // Toggle sort direction
   sortDirection = sortDirection === "asc" ? "desc" : "asc";
   e.target.dataset.sortDirection = sortDirection;
 
-  // Sort the filtered animals array based on the given property and direction
-  filteredAnimals.sort((a, b) => {
-    if (sortDirection === "asc") return a[sortName] < b[sortName] ? -1 : a[sortName] > b[sortName] ? 1 : 0;
-    else return a[sortName] > b[sortName] ? -1 : a[sortName] < b[sortName] ? 1 : 0;
-  });
+  // Sort
+  if (sortName === "star") {
+    filteredAnimals.sort((a, b) => {
+      // Sort by favorite property (0 or 1)
+      if (sortDirection === "asc") return b.favorite - a.favorite;
+      else return a.favorite - b.favorite;
+    });
+  } else {
+    // Sort the filtered animals array based on the given property and direction
+    filteredAnimals.sort((a, b) => {
+      if (sortDirection === "asc") return a[sortName] < b[sortName] ? -1 : a[sortName] > b[sortName] ? 1 : 0;
+      else return a[sortName] > b[sortName] ? -1 : a[sortName] < b[sortName] ? 1 : 0;
+    });
+  }
+
+  // Toggle the sortby class on the clicked header
+  e.target.classList.toggle("sortby");
 
   displayList(filteredAnimals);
 }

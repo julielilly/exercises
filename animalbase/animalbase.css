@@ -1,26 +1,131 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #0066cc;
+}
+
+p#buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button.filter {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Active state for filter buttons */
+button.filter.active {
+  background-color: #004a99; /* Darker shade for active button */
+}
+
+button.filter:hover:not(.active) {
+  background-color: #004a99;
+}
+
+/* Table Styles */
+#list {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#list thead {
+  background-color: #0066cc;
+  color: white;
+}
+
+#list th,
+#list td {
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+/* Set fixed column widths */
+#list th:nth-child(1), /* Star column */
+#list td[data-field="star"] {
+  width: 50px;
+}
+
+#list th:nth-child(2), /* Name column */
+#list td[data-field="name"] {
+  width: 150px;
+}
+
+#list th:nth-child(3), /* Type column */
+#list td[data-field="type"] {
+  width: 100px;
+}
+
+#list th:nth-child(4), /* Description column */
+#list td[data-field="desc"] {
+  width: 200px;
+}
+
+#list th:nth-child(5), /* Age column */
+#list td[data-field="age"] {
+  width: 50px;
+}
+
+#list tbody tr:nth-child(odd) {
+  background-color: #dceffd; /* Light blue */
+}
+
+#list tbody tr:nth-child(even) {
+  background-color: #f0f8ff; /* Very light blue */
+}
+
+#list tbody tr:hover {
+  background-color: #b3e5fc; /* Light hover effect */
+}
+
+/* Sorting Icons */
+#sorting th.sortby[data-sort-direction="asc"]::after {
+  content: " ⇓";
+  font-size: 0.8em;
+}
+
+#sorting th.sortby[data-sort-direction="desc"]::after {
+  content: " ⇑";
+  font-size: 0.8em;
+}
+
 [data-action] {
   cursor: pointer;
 }
 
-#sorting th.sortby {
-  text-decoration: underline;
+/* Favorite Stars */
+
+[data-field="star"] {
+  cursor: pointer;
 }
 
-#list {
-  border-collapse: collapse;
+td[data-active="false"] span {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: filter 0.3s, opacity 0.3s;
+  line-height: 1.25;
+  padding-left: 0.1rem;
 }
 
-#list tbody tr td {
-  padding: 4px;
-  
-}
-
-#list tbody tr:nth-child(odd) td {
-  background-color: lightblue;
-  border-right: rgb(240, 249, 255) 1px dotted;
-}
-
-#list tbody tr:nth-child(even) td {
-
-  border-right: rgb(171, 219, 252) 1px dotted;
+td[data-active="true"] span {
+  color: gold;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding-left: 0;
 }
