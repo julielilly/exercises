@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
 let filteredAnimals = [];
+let winners = [];
 
 // The prototype for all animals:
 const Animal = {
@@ -12,6 +13,7 @@ const Animal = {
   type: "",
   age: 0,
   favorite: false,
+  winner: false,
 };
 
 function start() {
@@ -52,6 +54,7 @@ function preapareObject(jsonObject) {
   animal.type = texts[3];
   animal.age = jsonObject.age;
   animal.favorite = false;
+  animal.winner = false;
 
   return animal;
 }
@@ -73,6 +76,81 @@ function displayAnimal(animal) {
   clone.querySelector("[data-field=desc]").textContent = animal.desc;
   clone.querySelector("[data-field=type]").textContent = animal.type;
   clone.querySelector("[data-field=age]").textContent = animal.age;
+
+  //winner
+  const winnerElement = clone.querySelector("[data-field=winner]");
+  winnerElement.innerHTML = "<span>🏆</span>";
+  winnerElement.setAttribute("data-active", animal.winner ? "true" : "false");
+
+  // Add event listener to toggle winner status
+  winnerElement.addEventListener("click", () => {
+    const currentWinners = allAnimals.filter((animal) => animal.winner); //check how many winners there are
+    const sameTypeWinner = currentWinners.some((winner) => winner.type === animal.type); //check if the selected animals type is already a winner
+
+    if (animal.winner) {
+      //if animal is currently a winner, just toggle off
+      animal.winner = false;
+      winnerElement.setAttribute("data-active", "false");
+    } else {
+      //if animal is not a winner, check constraints
+      if (currentWinners.length < 2 && !sameTypeWinner) {
+        animal.winner = true;
+        winnerElement.setAttribute("data-active", "true");
+      } else {
+        // Show dialog with current winners
+        const dialogHeader = document.getElementById("dialog-header");
+        const dialogMessege = document.getElementById("dialog-message");
+        const winnerList = document.getElementById("winner-list");
+
+        // Clear previous winners from the list
+        winnerList.innerHTML = "";
+
+        if (sameTypeWinner) {
+          dialogHeader.innerText = "You can only have one winner of the same type!";
+          dialogMessege.innerText = "Remove the other if you want to appoint a new one";
+        } else {
+          dialogHeader.innerText = "You can only have two winners!";
+          dialogMessege.innerText = "Remove one before you appoint more";
+        }
+
+        // Add current winners to the dialog
+        currentWinners.forEach((winner) => {
+          const listItem = document.createElement("li");
+          listItem.innerText = winner.name; // Show winner's name
+          const removeButton = document.createElement("button");
+          removeButton.innerText = "remove";
+
+          // Remove winner functionality
+          removeButton.onclick = () => {
+            // Set the specific winner's status to false
+            winner.winner = false;
+
+            // Find the trophy element for this winner
+            const winnerTrophy = Array.from(document.querySelectorAll("[data-field=winner]")).find((element) => {
+              return element.closest("tr").querySelector("[data-field=name]").textContent === winner.name;
+            });
+            // Update trophy display
+            if (winnerTrophy) {
+              winnerTrophy.setAttribute("data-active", "false"); // Set data-active to false
+            }
+
+            dialogBox.style.display = "none"; // Hide dialog
+          };
+
+          listItem.appendChild(removeButton);
+          winnerList.appendChild(listItem);
+        });
+
+        const dialogBox = document.getElementById("dialog");
+        dialogBox.style.display = "block"; // Show dialog
+
+        // Close dialog button
+        document.getElementById("close-dialog").onclick = () => {
+          dialogBox.style.display = "none"; // Hide dialog
+        };
+      }
+    }
+  });
 
   //favorite
   const starElement = clone.querySelector("[data-field=star]");
@@ -104,6 +182,12 @@ function addFilter(e) {
     filteredAnimals = allAnimals.filter((animal) => animal.type === filterType);
   }
 
+  // visual
+  const buttons = document.querySelectorAll("#buttons button");
+  buttons.forEach((button) => button.classList.remove("active")); // Clear active state from all buttons
+
+  e.target.classList.add("active"); // Set the clicked button as active
+
   // Display the filtered list
   displayList(filteredAnimals);
 }
@@ -129,6 +213,12 @@ function sortAnimals(e) {
       // Sort by favorite property (0 or 1)
       if (sortDirection === "asc") return b.favorite - a.favorite;
       else return a.favorite - b.favorite;
+    });
+  } else if (sortName === "winner") {
+    filteredAnimals.sort((a, b) => {
+      // Sort by favorite property (0 or 1)
+      if (sortDirection === "asc") return b.winner - a.winner;
+      else return a.winner - b.winner;
     });
   } else {
     // Sort the filtered animals array based on the given property and direction

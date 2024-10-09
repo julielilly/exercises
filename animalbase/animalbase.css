@@ -6,6 +6,39 @@ body {
   margin: 20px;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 2rem;
+
+  > li:nth-child(odd) {
+    background-color: #dceffd;
+  }
+  > li:nth-child(even) {
+    background-color: #f0f8ff;
+  }
+}
+
+li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  padding-left: 45%;
+
+  button {
+    background-color: transparent;
+    color: #0066cc;
+
+    &:hover:not(.active) {
+      background-color: transparent;
+      color: #004a99;
+    }
+  }
+}
+
 h1 {
   text-align: center;
   color: #0066cc;
@@ -16,7 +49,7 @@ p#buttons {
   margin-bottom: 20px;
 }
 
-button.filter {
+button {
   background-color: #0066cc;
   color: white;
   border: none;
@@ -32,7 +65,7 @@ button.filter.active {
   background-color: #004a99; /* Darker shade for active button */
 }
 
-button.filter:hover:not(.active) {
+button:hover:not(.active) {
   background-color: #004a99;
 }
 
@@ -57,41 +90,46 @@ button.filter:hover:not(.active) {
 }
 
 /* Set fixed column widths */
-#list th:nth-child(1), /* Star column */
+#list th:nth-child(1), /* Trophy column */
+#list td[data-field="winner"] {
+  width: 50px;
+}
+
+#list th:nth-child(2), /* Star column */
 #list td[data-field="star"] {
   width: 50px;
 }
 
-#list th:nth-child(2), /* Name column */
+#list th:nth-child(3), /* Name column */
 #list td[data-field="name"] {
   width: 150px;
 }
 
-#list th:nth-child(3), /* Type column */
+#list th:nth-child(4), /* Type column */
 #list td[data-field="type"] {
   width: 100px;
 }
 
-#list th:nth-child(4), /* Description column */
+#list th:nth-child(5), /* Description column */
 #list td[data-field="desc"] {
   width: 200px;
 }
 
-#list th:nth-child(5), /* Age column */
+#list th:nth-child(6), /* Age column */
 #list td[data-field="age"] {
   width: 50px;
 }
 
 #list tbody tr:nth-child(odd) {
-  background-color: #dceffd; /* Light blue */
+  background-color: #dceffd;
 }
 
 #list tbody tr:nth-child(even) {
-  background-color: #f0f8ff; /* Very light blue */
+  background-color: #f0f8ff;
 }
 
 #list tbody tr:hover {
-  background-color: #b3e5fc; /* Light hover effect */
+  background-color: #b3e5fc;
 }
 
 /* Sorting Icons */
@@ -109,9 +147,10 @@ button.filter:hover:not(.active) {
   cursor: pointer;
 }
 
-/* Favorite Stars */
+/* Favorite Stars and trophys */
 
-[data-field="star"] {
+[data-field="star"],
+[data-field="winner"] {
   cursor: pointer;
 }
 
@@ -128,4 +167,21 @@ td[data-active="true"] span {
   font-size: 1.2rem;
   line-height: 1;
   padding-left: 0;
+}
+
+/* dialog */
+
+#dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid black;
+  padding: 20px;
+  z-index: 1000;
+}
+
+#dialog-content {
+  text-align: center;
 }

@@ -11,11 +11,23 @@
 
 <body>
   <h1>Animals</h1>
+
+  <div id="dialog" style="display: none;">
+    <div id="dialog-content">
+      <h1 id="dialog-header"></h1>
+      <p id="dialog-message"></p>
+      <ul id="winner-list">
+        <!-- List of current winners -->
+      </ul>
+      <button id="close-dialog">Close</button>
+    </div>
+  </div>
+
   <p id="buttons">
     Filter:
     <button class="filter" data-action="filter" data-filter="cat">Only Cats</button>
     <button class="filter" data-action="filter" data-filter="dog">Only Dogs</button>
-    <button class="filter" data-action="filter" data-filter="*">all</button>
+    <button class="filter active" data-action="filter" data-filter="*">all</button>
   </p>
 
   <hr>
@@ -23,6 +35,7 @@
   <table id="list">
     <thead>
       <tr id="sorting">
+        <th data-action="sort" data-sort-direction="asc" data-sort="winner">🏆</th>
         <th data-action="sort" data-sort-direction="desc" data-sort="star">⭐</th>
         <th data-action="sort" data-sort-direction="desc" data-sort="name">Name</th>
         <th data-action="sort" data-sort-direction="desc" data-sort="type">Type</th>
@@ -37,7 +50,8 @@
 
   <template id="animal">
     <tr>
-      <td data-field="star">STAR</td>
+      <td data-field="winner">🏆</td>
+      <td data-field="star">⭐</td>
       <td data-field="name">NAME</td>
       <td data-field="type">TYPE</td>
       <td data-field="desc">DESCRIPTION</td>
