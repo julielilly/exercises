@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointer Move</title>
+    <style>
+        :root {
+            --hue: 200;
+            --saturation: 100%;
+            --lightness: 50%;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="info">
+        X-Position: <span id="xPos">0</span><br>
+        Y-Position: <span id="yPos">0</span><br>
+        Saturation: <span id="saturationValue">100%</span><br>
+        Lightness: <span id="lightnessValue">50%</span>
+    </div>
+
+</body>
+
+<script>
+    const xPos = document.getElementById('xPos');
+    const yPos = document.getElementById('yPos');
+    const saturationValue = document.getElementById('saturationValue');
+    const lightnessValue = document.getElementById('lightnessValue');
+
+    document.addEventListener('mousemove', function (e) {
+        console.log(e);
+
+        // Find musens X- og Y-positioner
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        // Beregn X som en procentdel af vinduets bredde og Y som procent af vinduets højde
+        const xPercent = (mouseX / window.innerWidth) * 100;
+        const yPercent = (mouseY / window.innerHeight) * 100;
+
+        // Opdater lightness (baseret på X) og saturation (baseret på Y)
+        document.documentElement.style.setProperty('--lightness', `${xPercent}%`);
+        document.documentElement.style.setProperty('--saturation', `${yPercent}%`);
+
+        // Opdater tekstinformationerne
+        xPos.textContent = mouseX;
+        yPos.textContent = mouseY;
+        saturationValue.textContent = `${Math.round(yPercent)}%`;
+        lightnessValue.textContent = `${Math.round(xPercent)}%`;
+    });
+</script>
+
+</html>

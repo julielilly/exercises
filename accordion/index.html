@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Breeds Accordion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+
+        }
+
+        .accordion {
+            width: 600px;
+            margin: auto;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+            overflow: hidden;
+
+            transition: max-height 0.4s ease;
+
+            background-color: #e9c46a;
+            color: #264653;
+        }
+
+        .accordion-header {
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .accordion-body {
+            padding: 0 15px;
+            background-color: #e9c46a;
+            color: #264653;
+            line-height: 1.6;
+
+            /* start hidden */
+            max-height: 0;
+
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .active .accordion-body {
+            max-height: 200px;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="accordion">
+        <!-- accordion items will be dynamically generated here -->
+    </div>
+
+
+</body>
+
+<script>
+    const accordionContent = [
+        {
+            title: "Siamese",
+            body: "The Siamese cat is one of the oldest and most recognizable breeds in the world. Known for their striking blue almond-shaped eyes and short, fine coat, they are also very vocal and social. Siamese cats are known to form strong bonds with their owners and can be quite affectionate."
+        },
+        {
+            title: "Maine Coon",
+            body: "Maine Coons are one of the largest domesticated cat breeds, known for their tufted ears, bushy tails, and friendly nature. They are intelligent and playful, often described as 'dog-like' because of their loyalty and sociable behavior. Maine Coons adapt well to families and are excellent companions."
+        },
+        {
+            title: "Bengal",
+            body: "Bengal cats have a distinct wild appearance, resembling a miniature leopard. They are energetic, playful, and intelligent, requiring plenty of mental and physical stimulation. Their stunning coat patterns and colors make them one of the most sought-after breeds for cat enthusiasts."
+        },
+        {
+            title: "Persian",
+            body: "Persian cats are known for their long, luxurious coats and sweet, gentle temperament. They tend to be quiet and affectionate, often enjoying a relaxed lifestyle. Due to their unique flat face, they require regular grooming to maintain their coat and keep them healthy."
+        },
+        {
+            title: "Ragdoll",
+            body: "Ragdolls are large, affectionate cats that go limp when picked up, hence the name. They have striking blue eyes and semi-longhair coats. Ragdolls are known for their calm and gentle nature, making them great companions, especially in families with children."
+        }
+    ];
+
+    // create the accordion items
+    const accordion = document.querySelector('.accordion');
+
+    accordionContent.forEach((item, index) => {
+        const accordionItem = document.createElement('div');
+
+        accordionItem.classList.add('accordion-item');
+
+        accordionItem.innerHTML = `
+                <div class="accordion-header" onclick="toggleAccordion(${index})">
+                    ${item.title}
+                </div>
+                <div class="accordion-body">
+                    ${item.body}
+                </div>
+            `;
+        accordion.appendChild(accordionItem);
+    });
+
+    // function to toggle accordion items
+    function toggleAccordion(index) {
+        const items = document.querySelectorAll('.accordion-item');
+        const currentItem = items[index];
+
+        // Toggle active class
+        if (currentItem.classList.contains('active')) {
+            currentItem.classList.remove('active');
+        } else {
+            // Close any other open items
+            items.forEach(item => item.classList.remove('active'));
+            currentItem.classList.add('active');
+        }
+    }
+</script>
+
+</html>
